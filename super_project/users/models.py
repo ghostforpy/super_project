@@ -1,4 +1,5 @@
 from django.contrib.auth import models
+from django.db import models as md
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField, ImageField
 from django.urls import reverse
@@ -22,3 +23,13 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+
+
+class Image(md.Model):
+    """Product images model."""
+    image = md.ImageField(upload_to='users/%Y/%m/%d', blank=True)
+    position = md.IntegerField(default=1)
+
+    class Meta:
+        verbose_name = 'Изображения продуктов'
+        verbose_name_plural = 'Изображения продуктов'
